@@ -9,6 +9,9 @@
 #include <devicetree.h>
 #include <drivers/gpio.h>
 
+// add uart
+#include <sys/printk.h>
+
 
 /* 1000 msec = 1 sec */
 #define SLEEP_TIME_MS   1000
@@ -33,6 +36,8 @@
 #define FLAGS	0
 #endif
 
+
+
 void main(void)
 {
 	struct device *dev;
@@ -52,6 +57,10 @@ void main(void)
 	while (1) {
 		gpio_pin_set(dev, PIN, (int)led_is_on);
 		led_is_on = !led_is_on;
+
+		printk("flavor fan --> Hello World! %s\n", CONFIG_BOARD);
+
+
 		k_msleep(SLEEP_TIME_MS);
 	}
 }
